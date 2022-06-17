@@ -69,6 +69,7 @@ p {
     transform: rotateY(180deg);
 }
 
+.virado .back-face,
 .virando .back-face {
     transform: rotateY(0deg);
 }

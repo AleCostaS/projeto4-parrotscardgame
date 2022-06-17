@@ -1,7 +1,7 @@
 let videos = ["imagens/unicornparrot.gif", "imagens/tripletsparrot.gif", "imagens/revertitparrot.gif", "imagens/metalparrot.gif", "imagens/fiestaparrot.gif", "imagens/explodyparrot.gif", "imagens/bobrossparrot.gif"];
 let numerodecartas = 0;
-let c = 0;
-let j = 0;
+let virado = false;
+let jogando = true;
 
 while (((numerodecartas % 2 == 0) && numerodecartas >= 4 && numerodecartas <= 14) == false){
     numerodecartas = prompt("Quantas cartas você quer jogar? (escolha um número par de 4 a 14)");
@@ -30,11 +30,38 @@ for (let i = 0; i < numerodecartas; i++){
             </div>
         </div>`;
 }
+let card1;
+let card2;
+let viradas = document.querySelectorAll(".virado");
 
 function virar(elemento){
-    const virando = document.querySelector(".virando");
-    if (virando != null){
+    elemento.classList.add("virando");
 
+    if (!virado){
+        virado = true;
+        card1 = elemento;
+        return;
+    } else {
+        virado = false;
+        card2 = elemento;
+
+        if (card1.childNodes[3].innerHTML == card2.childNodes[3].innerHTML){
+            card1.classList.remove("virando");
+            card2.classList.remove("virando");
+            card1.classList.add("virado");
+            card2.classList.add("virado");
+        } else {
+            card1.classList.remove("virando");
+            card2.classList.remove("virando");
+        }
     }
-    elemento.classList.add("virando")
-} 
+
+    while (jogando == true){
+        if (viradas.length == numerodecartas){
+            jogando = false;
+            alert("ganhei")
+        } else {
+            viradas = document.querySelectorAll(".virado");
+        }
+    }
+}
