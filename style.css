@@ -69,11 +69,11 @@ p {
     transform: rotateY(180deg);
 }
 
-.card:hover .back-face {
+.virando .back-face {
     transform: rotateY(0deg);
 }
 
-.card:hover .front-face {
+.virando .front-face {
     transform: rotateY(-180deg);
 }
 
