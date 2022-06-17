@@ -10,22 +10,37 @@ body {
     height: 150px;
     width: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 
     font-weight: 700;
     font-size: 56px;
     color: #75B79E;
 }
 
+p {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topo :nth-child(2),
+.topo :nth-child(3){
+    display: none;
+}
+
 .jogo {
-    margin: 0 122px;
+    margin: 0 250px;
+
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .card {
     width: 140px;
     height: 180px;
+    margin: 0 20px 40px 20px;
     position: relative;
 }
 
@@ -60,4 +75,38 @@ body {
 
 .card:hover .front-face {
     transform: rotateY(-180deg);
+}
+
+@media (max-width: 1420px){
+    .jogo {
+        margin: 0 200px;
+    }
+}
+
+@media (max-width: 700px){
+    .jogo {
+        margin: 0 30%;
+        
+    }
+
+    .topo {
+        font-size: 46px;
+    }
+
+    .topo :nth-child(2),
+    .topo :nth-child(3){
+        display: flex;
+    }
+
+    .topo :nth-child(3){
+        margin: 0;
+    }
+
+    .topo :nth-child(1) {
+        display: none;
+    }
+}
+
+@media (max-wideth: 614px){
+  
 }
