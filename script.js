@@ -2,6 +2,7 @@ let videos = ["imagens/unicornparrot.gif", "imagens/tripletsparrot.gif", "imagen
 let numerodecartas = 0;
 let virado = false;
 let jogando = true;
+let jogadas = 1;
 
 while (((numerodecartas % 2 == 0) && numerodecartas >= 4 && numerodecartas <= 14) == false){
     numerodecartas = prompt("Quantas cartas você quer jogar? (escolha um número par de 4 a 14)");
@@ -36,32 +37,36 @@ let viradas = document.querySelectorAll(".virado");
 
 function virar(elemento){
     elemento.classList.add("virando");
-
-    if (!virado){
-        virado = true;
-        card1 = elemento;
-        return;
+    if (elemento.classList.contains("virado")){
+    
     } else {
-        virado = false;
-        card2 = elemento;
-
-        if (card1.childNodes[3].innerHTML == card2.childNodes[3].innerHTML){
-            card1.classList.remove("virando");
-            card2.classList.remove("virando");
-            card1.classList.add("virado");
-            card2.classList.add("virado");
+        if (!virado){
+            virado = true;
+            card1 = elemento;
+            jogadas++;
+            return jogadas;
         } else {
-            card1.classList.remove("virando");
-            card2.classList.remove("virando");
-        }
-    }
-
-    while (jogando == true){
-        if (viradas.length == numerodecartas){
-            jogando = false;
-            alert("ganhei")
-        } else {
-            viradas = document.querySelectorAll(".virado");
+            virado = false;
+            card2 = elemento;
+    
+            if (card1.childNodes[3].innerHTML == card2.childNodes[3].innerHTML){
+                setTimeout(function(){   card1.classList.remove("virando"); card2.classList.remove("virando"); }, 500);
+                card1.classList.add("virado");
+                card2.classList.add("virado");
+                
+    
+                viradas = document.querySelectorAll(".virado");
+    
+                if (viradas.length == numerodecartas){
+                    jogando = false;
+                    console.log(viradas.length);
+                    jogadas++
+                    setTimeout(function(){  alert("Você ganhou em " + jogadas + " jogadas!"); }, 1000);
+                }  
+            } else {
+                setTimeout(function(){   card1.classList.remove("virando"); card2.classList.remove("virando"); }, 1500);
+                jogadas++
+            }
         }
     }
 }
