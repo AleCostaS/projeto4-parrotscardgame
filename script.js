@@ -1,25 +1,27 @@
 let videos = ["imagens/unicornparrot.gif", "imagens/tripletsparrot.gif", "imagens/revertitparrot.gif", "imagens/metalparrot.gif", "imagens/fiestaparrot.gif", "imagens/explodyparrot.gif", "imagens/bobrossparrot.gif"];
-let numerodecartas = 0;
+let numerodecartas = null;
 let virado = false;
 let jogando = true;
 let jogadas = 1;
+let cartas = [];
+let card1;
+let card2;
+let viradas = document.querySelectorAll(".virado");
+const jogo = document.querySelector(".jogo");
 
 while (((numerodecartas % 2 == 0) && numerodecartas >= 4 && numerodecartas <= 14) == false){
     numerodecartas = prompt("Quantas cartas você quer jogar? (escolha um número par de 4 a 14)");
 }
 
-let cartas = [];
-
 for (let i = 0; i < numerodecartas; i++){
     cartas.push(i);
 }
+
 cartas.sort(comparador);
 
 function comparador() { 
 	return Math.random() - 0.5; 
 }
-
-const jogo = document.querySelector(".jogo");
 
 for (let i = 0; i < numerodecartas; i++){
     jogo.innerHTML += `<div class="card" onclick="virar(this)">
@@ -31,9 +33,6 @@ for (let i = 0; i < numerodecartas; i++){
             </div>
         </div>`;
 }
-let card1;
-let card2;
-let viradas = document.querySelectorAll(".virado");
 
 function virar(elemento){
     elemento.classList.add("virando");
@@ -53,7 +52,6 @@ function virar(elemento){
                 setTimeout(function(){   card1.classList.remove("virando"); card2.classList.remove("virando"); }, 500);
                 card1.classList.add("virado");
                 card2.classList.add("virado");
-                
     
                 viradas = document.querySelectorAll(".virado");
     
@@ -61,12 +59,27 @@ function virar(elemento){
                     jogando = false;
                     console.log(viradas.length);
                     jogadas++
-                    setTimeout(function(){  alert("Você ganhou em " + jogadas + " jogadas!"); }, 1000);
+                    const tempo = document.querySelector(".contador").innerHTML;
+                    setTimeout(function(){  alert("Você ganhou em " + jogadas + " jogadas! e em " + tempo + " segundos"); }, 1000);
                 }  
             } else {
-                setTimeout(function(){   card1.classList.remove("virando"); card2.classList.remove("virando"); }, 1500);
+                setTimeout(function(){   card1.classList.remove("virando"); card2.classList.remove("virando"); }, 1000);
                 jogadas++
             }
         }
     }
 }
+
+let contador = 0;
+let intervalo;
+
+function contar() {
+    intervalo = setInterval(passartempo, 1000);
+}
+
+function passartempo() {
+  contador++;
+  document.querySelector(".contador").innerHTML = contador;
+}
+
+contar();
